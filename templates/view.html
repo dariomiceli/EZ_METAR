@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} About {% endblock %}
+
+{% block content%}
+
+<div class="container" style="margin-top: 50px">
+    <h1>About</h1>
+    <br>
+    <div>
+        <h4>METAR simply delivered.</h4>
+    </div>
+
+    <div>
+        <p>
+            NYC METAR is a project of NYC-based software developer and hobbyist pilot <a href="http://dariomiceli.com" target="_blank">Dario Miceli</a>. It is intended to help pilots
+            view METAR information quickly for airports surrounding the greater-NYC area.
+            NYC METAR is built on Python and Flask and uses the <a href="https://avwx.rest/" target="_blank">Aviation Weather REST API</a> for up-to-date information.
+            <br>
+            Special thanks to <a href="https://techwithtim.net/" target="_blank">Tim</a> and <a href="https://coreyms.com/" target="_blank">Corey</a> for all their help.
+        </p>
+    </div>
+
+    <div>
+        <div class="col-md-6">
+            <h6>
+                If you would like to contact the developer please use this form. Any and all feedback would be greatly appreciated.
+            </h6>
+    </div>
+        <form action="mailto:dariomiceli@gmail.com" method="get" enctype="text/plain">
+
+            <div class="form-group col-md-6">
+              <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+            </div>
+
+            <div class="form-group col-md-6">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Message Here"></textarea>
+            </div>
+
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+{% endblock %}

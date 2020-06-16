@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %} Weather {% endblock %}
+
+{% block content %}
+    <!-- Title, NYC and Zulu Time -->
+    <div class="container">
+        <div class="col-md-6">
+            <h3>NYC METAR</h3>
+            <h5>As of...</h5>
+            <h5>NYC: {{timeNYC}}</h5>
+            <h5>Zulu: {{timeUTC}}</h5>
+        </div>
+    </div>
+
+    <!-- List of Cards -->
+    <div class="container">
+        <div class="row">
+            {% for x in data %}
+                <div class="col-sm-4">
+                    <div class="card">                                              <!-- creates card -->
+
+                        <div class="card-header"><h3>{{data[x]["station"]}}</h3>    <!-- Card Header -->
+                            {% if data[x]["flight_rules"] == "VFR" %}               <!-- VFR Badge -->
+                                <span class="badge badge-success">
+                                    {{data[x]["flight_rules"]}}
+                                </span>
+                            {% elif data[x]["flight_rules"] == "MVFR" %}            <!-- MVFR Badge -->
+                                <span class="badge badge-primary">
+                                    {{data[x]["flight_rules"]}}
+                                </span>
+                            {% elif data[x]["flight_rules"] == "IFR" %}             <!-- IFR Badge -->
+                                <span class="badge badge-danger">
+                                    {{data[x]["flight_rules"]}}
+                                </span>
+                            {% elif data[x]["flight_rules"] == "LIFR" %}            <!-- LIFR Badge -->
+                                <span class="badge badge-dark">
+                                    {{data[x]["flight_rules"]}}
+                                </span>
+                            {% endif %}
+
+                            {% if data[x]["station"] == "KFRG" %}                   <!-- Logic for TAF -->
+
+                            {% elif data[x]["station"] == "KDXR" %}
+
+                            {% elif data[x]["station"] == "KFOK" %}
+
+                            {% else %}
+                                <a href="https://www.aviationweather.gov/taf/data?ids={{data[x]['station']}}&format=raw&date=&submit=Get+TAF+data">TAF</a>
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body">                                     <!-- card body -->
+                            <h5 class="card-title"></h5>
+                            <p class="card-text">{{data[x]["sanitized"]}}</p>       <!-- Raw METAR -->
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h2 class="mb-0">                           <!-- Dropdown Button -->
+                                        <button class="btn btn-block text-left" onclick="this.blur()" type="button" data-toggle="collapse" data-target="#{{ x }}" aria-expanded="true" aria-controls="collapseTwo">
+                                            Decoded:
+                                        </button>
+                                        </h2>
+                                                                                    <!-- "decoded" -->
+                                        <div id="{{ x }}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                            <div class="card card-body">
+                                                Day of month: {{dayOfMonth}} <br>
+                                                Wind:
+                                                    <!-- if wind dir & wind speed = 0 "No wind" -->
+                                                    {% if data[x]["wind_direction"] %}
+                                                        {{data[x]["wind_direction"]["value"]}}&deg at {{data[x]["wind_speed"]["value"]}}kts<br>
+                                                    {% else %}
+                                                        {{data[x]["wind_speed"]["value"]}}kts
+                                                    {% endif %}
+                                                Visibility: {{data[x]["visibility"]["value"]}} SM<br>
+                                                Weather:
+                                                {% if data[x]["wx_codes"] %}
+                                                    {{data[x]["wx_codes"][0]["value"]}}<br>
+                                                {% else %}
+                                                    None<br>
+                                                {% endif %}
+                                                Clouds:
+                                                {% if data[x]["clouds"] %}
+                                                    {% for x in data[x]["clouds"] %}
+                                                        {{x["type"]}} at {{x["altitude"]}}00'
+                                                    {% endfor %}
+                                                {% else %}
+                                                    None
+                                                {% endif %}
+                                                <br>
+                                                Temperature: {{data[x]["remarks_info"]["temperature_decimal"]["value"]}}&degC<br>
+                                                Dewpoint: {{data[x]["remarks_info"]["dewpoint_decimal"]["value"]}}&degC <br>
+                                                Altimeter: {{data[x]["altimeter"]["value"]}}"
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p></p>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

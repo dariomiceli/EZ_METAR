@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} EZ METAR {% endblock %}
+
+{% block content%}
+
+<div class="container" style="margin-top: 50px">
+
+    <br>
+    <div class="jumbotron">
+        <h1 class="display-4">METAR, simply delivered.</h1>
+        <hr class="my-4">
+        <p class="lead">Designed for GA pilots to easily access the information they need the most and fly safe.
+            Get easy access to METAR data for Bravo, Charlie and Delta class airports.</p>
+        <p class="lead">Start here...</p>
+        <a class="btn btn-primary btn-lg" href="/nyc" role="button">New York City</a>
+        <a class="btn btn-primary btn-lg" href="/la" role="button">Los Angeles</a>
+        <a class="btn btn-primary btn-lg" href="/sea_tac" role="button">Seattle</a>
+        <a class="btn btn-primary btn-lg" href="/DFW" role="button">Dallas - Ft. Worth</a>
+        <a class="btn btn-primary btn-lg" href="/sd" role="button">San Diego</a>
+    </div>
+
+</div>
+
+{% endblock %}
