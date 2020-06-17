@@ -44,6 +44,8 @@
 
                             {% elif data[x]["station"] == "KFOK" %}
 
+                            {% elif data[x]["station"] == "KFHR" %}
+
                             {% else %}
                                 <a href="https://www.aviationweather.gov/taf/data?ids={{data[x]['station']}}&format=raw&date=&submit=Get+TAF+data">TAF</a>
                             {% endif %}

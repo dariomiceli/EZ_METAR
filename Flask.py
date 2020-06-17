@@ -16,7 +16,7 @@ def home():
 
 
 @app.route("/nyc")
-def weather():
+def weatherNYC():
     url = 'https://avwx.rest/api/multi/metar/KJFK,KLGA,KEWR,kISP,KFRG,KBDR,KDXR,KGON,KPOU,KFOK?token=' + apiKey
     res = requests.get(url).text
     goodData = json.loads(res, object_pairs_hook=OrderedDict)
@@ -47,9 +47,9 @@ def weatherLA():
                            timeOfDay=timeOfDay)
 
 
-@app.route("/la")
+@app.route("/sea_tac")
 def weatherSEA():
-    url = 'https://avwx.rest/api/multi/metar/KLAX,KVNY,KONT,KSNA,KBUR,KWHP,KOXR,KSBA,KSMX?token=' + apiKey
+    url = 'https://avwx.rest/api/multi/metar/KSEA,KGEG,KBLI,KPSC,KYKM,KPUW,KEAT,KALW,KBFI,KFHR?token=' + apiKey
     res = requests.get(url).text
     goodData = json.loads(res, object_pairs_hook=OrderedDict)
 
@@ -63,7 +63,7 @@ def weatherSEA():
                            timeOfDay=timeOfDay)
 
 
-@app.route("/la")
+@app.route("/dfw")
 def weatherDFW():
     url = 'https://avwx.rest/api/multi/metar/KLAX,KVNY,KONT,KSNA,KBUR,KWHP,KOXR,KSBA,KSMX?token=' + apiKey
     res = requests.get(url).text
