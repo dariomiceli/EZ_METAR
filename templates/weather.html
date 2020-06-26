@@ -5,8 +5,7 @@
     <!-- Title, NYC and Zulu Time -->
     <div class="container">
         <div class="col-md-6">
-            <h3>NYC METAR</h3>
-            <h5>As of...</h5>
+            <h5>METAR Data as of...</h5>
             <h5>NYC: {{timeNYC}}</h5>
             <h5>Zulu: {{timeUTC}}</h5>
         </div>
@@ -47,7 +46,10 @@
                             {% elif data[x]["station"] == "KFHR" %}
 
                             {% else %}
-                                <a href="https://www.aviationweather.gov/taf/data?ids={{data[x]['station']}}&format=raw&date=&submit=Get+TAF+data">TAF</a>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tafmodal-{{ x }}">
+                                    TAF
+                                </button>
+                                <!-- <a href="https://www.aviationweather.gov/taf/data?ids={{data[x]['station']}}&format=raw&date=&submit=Get+TAF+data">TAF</a> -->
                             {% endif %}
                         </div>
 
@@ -104,6 +106,27 @@
                         <p></p>
                     </div>
 
+                </div>
+
+
+                <div class="modal fade" id="tafmodal-{{ x }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        {{ tafRes[x]['raw'] }}
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             {% endfor %}
         </div>
